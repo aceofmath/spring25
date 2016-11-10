@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+	<!-- spring과 연동하는 경우, sql구문이 정의된 xml파일을 등록한다. -->
+	<sqlMap resource="test/exam13/dept.xml"/>
+	
+	<!-- 여러개일 경우는 아래와 같이 계속 추가해 주면 됨 
+	<sqlMap resource="test/emp.xml"/>
+	<sqlMap resource="test01/dept/dept_01.xml"/>
+	<sqlMap resource="test02/emp/emp_01.xml"/>
+	-->
+	
+</sqlMapConfig>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!-- Mapper 파일 -->
+<sqlMap namespace="dept">
+
+	<!-- CRUD작업과 관련된 SQL 구문을 정의한다. -->
+	<insert id="add" parameterClass="test.exam13.DeptVO">
+		INSERT
+  		INTO JOBS(JOB_ID, JOB_TITLE, MIN_SALARY, MAX_SALARY)
+  		VALUES(#JOB_ID#, #JOB_TITLE#, #MIN_SALARY#, #MAX_SALARY#)
+	</insert>	
+
+	<!-- 
+		parameterClass는 클래스 타입만 기술가능함
+		기본자료형은 자료형의 이름으로 기술함 : int = java.lang.Integer
+		parameter가 2개 이상이면 무조건 VO를 사용
+	 -->
+	<delete id="remove" parameterClass="String">
+		DELETE
+		FROM JOBS
+		WHERE JOB_ID = #JOB_ID#
+	</delete>
+	
+	<!-- 
+		select의 결과 컬럼이름과 VO의 멤버변수 이름하고 같아야 결과를 정상적으로 반환 받을 수 있음
+		아래처럼 컬럼의 이름이 VO의 멤버변수명과 다를때는 as를 이용하여 VO의 멤버변수명 같도록 해줌 
+		resultClass : 쿼리문 실행 후 얻어진 결과값(한개의 튜플)을 저장할 객체타입을 지정
+	-->
+	<select id="info" parameterClass="String" resultClass="test.exam13.DeptVO">
+		SELECT JOB_ID, JOB_TITLE, MIN_SALARY, MAX_SALARY
+		FROM JOBS
+		WHERE JOB_ID = #JOB_ID#
+	</select>
+	
+	<!-- 
+		결과 집합이 여러개의 행으로 얻어지더라도 resultClass에는 한개의 튜플과 매핑되는 class 타입을 지정 
+		resultClass의 VO멤버변수명과 쿼리 결과의 컬럼명 이름이 반드시 같아야함(대소문자 구분 안함)
+	-->
+	<select id="list" resultClass="test.exam13.DeptVO">
+		SELECT JOB_ID, JOB_TITLE, MIN_SALARY, MAX_SALARY
+		FROM JOBS
+	</select>
+	
+</sqlMap>

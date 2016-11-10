@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 1. dataSource 생성 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		p:driverClassName="oracle.jdbc.OracleDriver"
+		p:url="jdbc:oracle:thin:@127.0.0.1:1521:XE"
+		p:username="HR"
+		p:password="1212"></bean>
+	
+	<!-- xxxDaoSupport를 상속받아서 DeptDao 구현클래스를 작성하는 경우 dataSource를 주입해줘야 함 -->
+	<bean id="deptDao2" class="test.exam11.DeptDaoimp2"
+		p:dataSource-ref="dataSource"></bean>
+
+</beans>

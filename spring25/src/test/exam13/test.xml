@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+						http://www.springframework.org/schema/tx
+						http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+
+	<!-- 1. dataSource 생성 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"></property>
+		<property name="username" value="HR"></property>
+		<property name="password" value="1212"></property>
+	</bean>
+	
+	<!-- 2. ibatis 코딩을 지원해주는 SqlMapClient 객체생성 -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="src/test/exam13/SqlMapConfig.xml"></property>
+	</bean>
+
+	<!-- 3. DeptDaoImp -->
+	<!-- SqlMapClientDaoSupport를 상속받은 경우 템플릿을 생성할 필요가 없다 -->
+	<bean id="deptDao" class="test.exam13.DeptDaoImp">
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+	
+</beans>

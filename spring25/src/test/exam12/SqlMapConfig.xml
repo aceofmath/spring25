@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+	<!-- mapper 파일에서 실행할 sql 구문을 찾을 때 namespace를 사용하도록 설정 -->
+	<settings useStatementNamespaces="true"/>
+
+
+	<!-- dataSource 설정(후에 Spring하고 연동하게 되면 필요없어 짐.)-->
+	<transactionManager type="JDBC" commitRequired="false">
+		<dataSource type="SIMPLE">
+			<property name="JDBC.Driver" value="oracle.jdbc.OracleDriver"/>
+			<property name="JDBC.ConnectionURL" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"/>
+			<property name="JDBC.Username" value="HR"/>
+			<property name="JDBC.Password" value="1212"/>
+		</dataSource>
+	</transactionManager>
+
+  
+	<!-- mapper file 등록(mapper file은 여러개를 등록해 쓸 수 있음 -->
+	<sqlMap resource="test/exam12/dept.xml"/>
+
+</sqlMapConfig>

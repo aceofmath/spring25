@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="service" class="aop.exam02.ServiceImpl"></bean>
+	
+	<!-- POJO로 구현된 Advice 빈 설정 -->
+	<bean id="loggingAdvice" class="aop.exam02.LoggingAdvice"></bean>
+
+	<bean id="timeCheckAdvice" class="aop.exam02.TimeCheckAdvice"></bean>
+
+
+	<!-- AOP 설정 : ServiceImpl의 모든 메소드에 LoggingAdvice의 logging 기능이 메소드 수행전에 적용되도록 설정 -->
+	<aop:config>
+		<aop:aspect ref="loggingAdvice">
+			<aop:before method="logging" pointcut="execution(* aop.exam02.ServiceImpl.*())"/>
+		</aop:aspect>
+	</aop:config>
+
+	<!-- AOP 설정 : aop:around일 경우 주의가 필요(해당 advice에서 joinPoint.proceed() 코드가 반드시 필요 -->
+	<aop:config>
+		<aop:aspect ref="timeCheckAdvice">
+			<aop:around method="check" pointcut="execution(* aop.exam02.ServiceImpl.*())"/>
+		</aop:aspect>
+	</aop:config>
+	
+</beans>
