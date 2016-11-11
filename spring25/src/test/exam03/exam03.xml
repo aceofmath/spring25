@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="jdbcDao" class="test.exam03.JdbcDao"></bean>
+	
+	<!-- 
+		JdbcService의 serviceTest( )메소드를 사용하기 위해서는 JdbcDao.class의 객체(빈)가 반드시 필요
+		그러므로 service 빈을 생성할 때 필요로하는 JdbcDao의 빈(jdbcDao)를 생성자를 통해 주입해줌
+	-->
+	<bean id="service" class="test.exam03.JdbcService">
+		<constructor-arg ref="jdbcDao"></constructor-arg>
+	</bean>
+
+</beans>

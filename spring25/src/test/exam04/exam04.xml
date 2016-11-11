@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="ibatis" class="test.exam04.IbatisDao"></bean>
+	
+	<!-- 
+		setXXX( ) 형태의 메서드에서 프로퍼티(property)의 이름은 set을 뺀 XXX가 된다.
+		즉, 아래의 property 이름이 ibatisDao로 되어 있는데 이는 해당 class의 setIbatisDao()를
+		호출하게 되는 것이다.
+		이와 같은 설정방식을 프로퍼티 설정 방식이라고 한다.
+	 -->
+	<bean id="service" class="test.exam04.IbatisService">
+		<property name="ibatisDao" ref="ibatis" />
+	</bean>
+	
+</beans>
