@@ -13,6 +13,7 @@ public class DeptVo implements Serializable{
 		this.deptno = deptno;
 		this.dname = deptname;
 		this.loc = loc;
+		
 	}
 	
 	public int getDeptno() {
